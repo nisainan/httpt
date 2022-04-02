@@ -1,4 +1,4 @@
-package httpt
+package proxy
 
 import (
 	"io"

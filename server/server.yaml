@@ -1,0 +1,6 @@
+enable-tls: "true"
+cert: "server/cert/quic.shengtao.vip_chain.crt"
+key: "server/cert/quic.shengtao.vip_key.key"
+addr: "0.0.0.0:443"
+secret-link: "/secretLink"
+upstream: "http://127.0.0.1:80"

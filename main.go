@@ -2,16 +2,16 @@ package main
 
 import (
 	"fmt"
+	"github.com/nisainan/wstunnel/client"
+	"github.com/nisainan/wstunnel/server"
 	"github.com/urfave/cli"
 	_ "go.uber.org/automaxprocs"
-	"httpt/client"
-	"httpt/server"
 	"os"
 )
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "httpt"
+	app.Name = "wstunnel"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "type",
@@ -31,11 +31,11 @@ func main() {
 		}
 		switch serverType {
 		case "client":
-			client.Run(c)
+			return client.Run(c)
 		case "server":
 			server.Run(c)
 		default:
-			server.Run(c)
+			return client.Run(c)
 		}
 		return nil
 	}

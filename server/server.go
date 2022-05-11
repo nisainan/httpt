@@ -6,9 +6,9 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
+	"github.com/nisainan/wstunnel/proxy"
+	"github.com/nisainan/wstunnel/util"
 	"github.com/urfave/cli"
-	"httpt/proxy"
-	"httpt/util"
 	"io"
 	"log"
 	"net"
@@ -55,14 +55,8 @@ func Run(c *cli.Context) {
 		Handler: server,
 	}
 	go func() {
-		if server.config.EnableTLS {
-			if err := srv.ListenAndServeTLS(server.config.Cert, server.config.Key); err != nil && !errors.Is(err, http.ErrServerClosed) {
-				log.Fatalf("listen: %s\n", err)
-			}
-		} else {
-			if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
-				log.Fatalf("listen: %s\n", err)
-			}
+		if err := srv.ListenAndServeTLS(server.config.Cert, server.config.Key); err != nil && !errors.Is(err, http.ErrServerClosed) {
+			log.Fatalf("listen: %s\n", err)
 		}
 	}()
 	fmt.Println("start", server.config.Addr)
@@ -79,6 +73,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		s.proxyCheatAddress(w, r)
 		return
 	}
+	//fmt.Println(r.RemoteAddr, "==================")
 	serverConn, err := net.Dial("tcp", targetAddr)
 	//log.Println("connecting to ", targetAddr)
 	if err != nil {

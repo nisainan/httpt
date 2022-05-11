@@ -3,9 +3,9 @@ package client
 import (
 	"bufio"
 	"fmt"
+	"github.com/nisainan/wstunnel/proxy"
 	tls "github.com/refraction-networking/utls"
 	"github.com/urfave/cli"
-	"httpt/proxy"
 	"log"
 	"net"
 	"net/http"
@@ -95,6 +95,6 @@ func (c *Client) handleConn(clientConn net.Conn) {
 	_ = proxy.TransparentProxy(clientConn, serverConn)
 }
 
-func Run(c *cli.Context) {
-	NewClient(c).ListenAndServe()
+func Run(c *cli.Context) error {
+	return NewClient(c).ListenAndServe()
 }

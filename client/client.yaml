@@ -1,4 +1,4 @@
 local-addr: "127.0.0.1:9999"
-server-addr: "quic.shengtao.vip:443"
-sni: "quic.shengtao.vip"
+server-addr: "dommain:8443"
+sni: "dommain"
 secret-link: "/secretLink"

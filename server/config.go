@@ -7,7 +7,6 @@ import (
 )
 
 type Config struct {
-	EnableTLS  bool   `json:"enable_tls" yaml:"enable-tls" mapstructure:"enable-tls"`
 	Cert       string `json:"cert" yaml:"cert"`                                          // Cert CertDir
 	Key        string `json:"key" yaml:"key"`                                            // Key KeyDir
 	Addr       string `json:"addr" yaml:"addr"`                                          // Addr 52.33.220.110:443
@@ -23,9 +22,6 @@ func NewConfig(c *cli.Context) (config *Config) {
 	}
 	if err := v.Unmarshal(&config); err != nil {
 		panic(fmt.Sprintf("fatal error unmarshal config: %s", err))
-	}
-	if config.EnableTLS && (len(config.Cert) == 0 || len(config.Key) == 0) {
-		panic("cert and key must be provided when enable tls")
 	}
 	return
 }

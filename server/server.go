@@ -212,7 +212,7 @@ func (s *Server) dualStream(target net.Conn, clientReader io.ReadCloser, clientW
 func (s *Server) generateInitialWSResponse(req *http.Request) ([]byte, error) {
 	resp := http.Response{
 		Status:           "101 Switching Protocols",
-		StatusCode:       101,
+		StatusCode:       http.StatusSwitchingProtocols,
 		Proto:            "HTTP/1.1",
 		ProtoMajor:       1,
 		ProtoMinor:       1,

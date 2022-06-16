@@ -11,7 +11,7 @@ A proxy based on native ws protocal. But can response a http2 website that you c
 - Secret link
 - Camouflage traffic
 - CDN
-- ClientHello fingerprinting resistance(working on it)
+- ClientHello fingerprinting resistance
 
 ## Installing
 
